@@ -4,7 +4,7 @@ This README provides instructions for setting up and running the test suite for 
 
 ## Running Tests in TeamBalancerImplTest
 
-You can run the test suite directly from your IDE or build tool by executing the test cases in the `TeamBalancerImplTest` class.
+You can run the test suite directly from your IDE or build tool by executing the testes cases in the `TeamBalancerImplTest` and `TeamPrinterImplTest`class.
 
 ## Running Tests via Maven
 
