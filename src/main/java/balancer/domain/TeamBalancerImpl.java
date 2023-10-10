@@ -20,10 +20,7 @@ public class TeamBalancerImpl implements TeamBalancer {
         validateTeamBalance();
         Collections.sort(members, (p1, p2) -> Double.compare(p2.getRate(), p1.getRate()));
 
-        final List<Team> teamResults = new ArrayList<>();
-        for (int i = 0; i < numOfTeams; i++){
-            teamResults.add(new Team(new ArrayList<>()));
-        }
+        final List<Team> teamResults = initializeTeamResults();
 
 
         for (final Member member : members) {
@@ -36,6 +33,14 @@ public class TeamBalancerImpl implements TeamBalancer {
             if (teamWithLowestSumRate != null) {
                 teamWithLowestSumRate.getMembers().add(member);
             }
+        }
+        return teamResults;
+    }
+
+    private List<Team> initializeTeamResults() {
+        final List<Team> teamResults = new ArrayList<>();
+        for (int i = 0; i < numOfTeams; i++){
+            teamResults.add(new Team(new ArrayList<>()));
         }
         return teamResults;
     }
