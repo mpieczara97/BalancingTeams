@@ -22,7 +22,6 @@ public class TeamBalancerImpl implements TeamBalancer {
 
         final List<Team> teamResults = initializeTeamResults();
 
-
         for (final Member member : members) {
             final Team teamWithLowestSumRate =
                     teamResults
@@ -39,7 +38,7 @@ public class TeamBalancerImpl implements TeamBalancer {
 
     private List<Team> initializeTeamResults() {
         final List<Team> teamResults = new ArrayList<>();
-        for (int i = 0; i < numOfTeams; i++){
+        for (int i = 0; i < numOfTeams; i++) {
             teamResults.add(new Team(new ArrayList<>()));
         }
         return teamResults;

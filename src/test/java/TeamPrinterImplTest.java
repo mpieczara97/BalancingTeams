@@ -1,16 +1,30 @@
-import balancer.domain.*;
+import balancer.domain.Member;
+import balancer.domain.Team;
+import balancer.domain.TeamPrinterImpl;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import  org.junit.Rule;
-import org.junit.contrib.java.lang.system.SystemOutRule;
 
-import java.util.ArrayList;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 
 class TeamPrinterImplTest {
-    @Rule
-    public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
+
+    private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    private final PrintStream originalStream = System.out;
+
+    @BeforeEach
+    public void setupStreams() {
+        System.setOut(new PrintStream(outputStream));
+    }
+
+    @AfterEach
+    public void restoreStreams() {
+        System.setOut(originalStream);
+    }
 
     @Test
     void shouldPrintTeamsAndStandardDeviation() {
@@ -30,9 +44,9 @@ class TeamPrinterImplTest {
         teamPrinter.printTeams();
 
         //then
-        String expectedOutput = "Team no 1 has 2 players (Johny, Juliet). Average rate: 5.0  \n" +
-                "Team no 2 has 2 players (Robbie, Scarlet). Average rate: 4.5  \n" +
-                "Teams rate standard deviation: 0.25\n";
-        Assertions.assertEquals(expectedOutput, systemOutRule.getLog());
+        String expectedOutput = "Team no 1 has 2 players (Johny, Juliet). Average rate: 5.0  " + System.lineSeparator() +
+                "Team no 2 has 2 players (Robbie, Scarlet). Average rate: 4.5  " + System.lineSeparator() +
+                "Teams rate standard deviation: 0.25";
+        Assertions.assertEquals(expectedOutput.trim(), outputStream.toString().trim());
     }
 }
